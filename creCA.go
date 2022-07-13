@@ -39,12 +39,23 @@ var path, opt string
             os.Exit(-1)
     }
 
-    fmt.Printf("folder path: %s option: %s\n", path, opt)
+    if len(opt) > 0 {
+        fmt.Printf("cmd line: folder path: %s option: %s\n", path, opt)
+    } else {
+        fmt.Printf("cmd line: folder path: %s no option\n", path)
+    }
 
-    err := certLib.CreCaFolders(path)
-    if err != nil {
-        fmt.Printf("error CreCaFolders: %v", err)
-        os.Exit(-1)
+    switch opt {
+    case "del":
+        fmt.Println("*** deleting Ca folders ***")
+
+    default:
+        fmt.Println("*** creating Ca folders ***")
+        err := certLib.CreCaFolders(path)
+        if err != nil {
+            fmt.Printf("error CreCaFolders: %v\n", err)
+            os.Exit(-1)
+        }
     }
 
     fmt.Println("***** success *****")
