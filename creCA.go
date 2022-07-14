@@ -48,6 +48,11 @@ var path, opt string
     switch opt {
     case "del":
         fmt.Println("*** deleting Ca folders ***")
+        err := certLib.DelCaFolders(path)
+        if err != nil {
+            fmt.Printf("error DelCaFolders: %v\n", err)
+            os.Exit(-1)
+        }
 
     default:
         fmt.Println("*** creating Ca folders ***")
